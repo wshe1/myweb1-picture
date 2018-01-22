@@ -1,7 +1,7 @@
 import logging
 
 #create logger
-logger=logging.getLogger('simple_example')
+logger=logging.getLogger('simple_example')#实例化longger
 #logger=logging.basicConfig(filename='example.log',filemode='w')
 logger.setLevel(logging.DEBUG)
 

@@ -1,6 +1,8 @@
 #coding:utf-8
 #当python 不捕识别汉字所以加上面一行
 import logging
+import random
+import re
 def demo_string():
     stra='hellO world';
     print stra.capitalize()#
@@ -181,9 +183,41 @@ def demo_exception():
         print 'clean up'#最终不管是否出错都执行
 
 
+def demo_random():
+    print 1,int(random.random()*100)
+    # 默认是0-1,产生1-100
+    print 2,random.randint(0,200)
+    print 3,random.choice(range(0,100,10))#0-100随机选一一个，步长为10
+    #
+    random.seed(1)
+    print 4,random.sample(range(0,100),4)#随机选择4个
+    a=[1,2,3,4,5]
+    random.shuffle(a) #随机打乱
+    print 5,a
 
-
-
+def demo_re():
+    str='abc123def12gh15'#一串数字
+    p1=re.compile('[\d]+')
+    p2=re.compile('[\d]') #单个数字
+    print 1,p1.findall(str)
+    print 2,p2.findall(str)
+    str1='a@163.com;b@qq.com;c@google.com,d@163.com'
+    p3=re.compile('[\w]+@163\.com')
+    print 3,p3.findall(str1)
+    p4 = re.compile('[\w]+@[163|qq]+\.com')#或操作
+    print 4,p4.findall(str1)
+    p5=re.compile('[\w]+@[^qq]+\.com')#取反操作
+    print 5, p5.findall(str1)
+    str2='<html><h>title</h><body>xxx</body></html>'
+    p6=re.compile('<h>[^<]+</h>')
+    print 6,p6.findall(str2)
+    p7 = re.compile('<h>([^<]+)</h><body>([^<]+)</body>')#()的用法
+    print 7, p7.findall(str2)
+    str3='xxx2018-01-22yyy'
+    p8=re.compile('\d\d\d\d-\d\d-\d\d')
+    print 8,p8.findall(str3)
+    p9=re.compile('\d{4}-\d{2}-\d{2}')#匹配几位数字
+    print 9,p9.findall(str3)
 if __name__ == '__main__':
     user1=User('u1',1)
     print user1
@@ -196,3 +230,5 @@ if __name__ == '__main__':
     #demo_dict()
     #demo_set()
     demo_exception()
+    demo_random()
+    demo_re()
